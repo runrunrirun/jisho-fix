@@ -10,16 +10,6 @@
 
 /* jshint esversion:6 */
 
-const showOtherForms = (node, button) => {
-    if (node.style.display === "none") {
-        node.style.display = "inline-block";
-        button.innerHTML = "Hide";
-    } else {
-        node.style.display = "none";
-        button.innerHTML = "Show";
-    }
-}
-
 (function() {
     'use strict';
   
@@ -161,23 +151,15 @@ const showOtherForms = (node, button) => {
         }
     });
 
-    // Example sentences on the right side
- //   const secondarySentences = document.querySelector("div#secondary > div.sentences_block");
-//    if (secondarySentences) {
-//        secondarySentences.style.display = "none";
-//    }
-
     // Links under the words (play audio, collocations, links)
-//    const links = document.querySelectorAll("div.concept_light-status > a");
-//    links.forEach(link => {
-//        link.style.display = "none";
-//    });
-
-    // Common word tags
-//    const commonWordTags = document.querySelectorAll("div.concept_light-status > span.success");
-//    commonWordTags.forEach(tag => {
-//        tag.style.display = "none";
-//    });
+    const links = document.querySelectorAll("div.concept_light-status > a");
+   links.forEach(link => {
+        if (link.innerHTML === "Play audio") {
+            link.innerHTML = "Audio";
+            } else if (link.innerHTML === "Show inflections") {
+                link.innerHTML = "Inflections";
+            }
+    });
 
     // JLPT level tags
     levelTags.forEach(tag => {
@@ -192,31 +174,6 @@ const showOtherForms = (node, button) => {
             tag.style.display = "none";
         }
     });
-
-    // Other forms
-//    const otherForms = document.querySelectorAll("span.meaning-meaning");
-//    const entries = document.querySelectorAll("div.concept_light-wrapper.columns.zero-padding");
-//    if (entries.length > 3) {
-//        otherForms.forEach(f => {
-//            if (f.children.length > 2) {
-//                f.style.display = "none";
-//                const newButton = document.createElement("button");
-//                newButton.innerHTML = "Show";
-//                newButton.style.padding = "0rem 1rem";
-//                newButton.style.margin = "0";
-//                newButton.onclick = () => showOtherForms(f, newButton);
-//                f.parentNode.parentNode.parentNode.appendChild(newButton);
-//            }
-//        })
-//    }
-
-    // Wikipedia definitions
-//    const wikiDefinitions = document.querySelectorAll("div.meaning-definition.zero-padding > span > a");
-//    wikiDefinitions.forEach(d => {
-//        if (d.innerHTML === " Read more") {
-//            d.parentNode.parentNode.style.display = "none";
-//        }
-//    });
   
     meaningTags.forEach(tag => {
         if (tag.innerHTML === "Wikipedia definition") {
@@ -250,6 +207,7 @@ const showOtherForms = (node, button) => {
     // You can change the number color every other row if desired
     const numlabels = document.querySelectorAll("span.meaning-definition-section_divider");  
     var iterator = 1;
+    
     numlabels.forEach(lbl => {
         lbl.style.fontWeight = "normal";
         lbl.style.color = "black";
