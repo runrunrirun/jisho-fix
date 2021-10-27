@@ -143,7 +143,7 @@
   
     // Parts of speech purge 
     meaningTags.forEach(s => {
-        if( s.innerHTML.startsWith("Other")) {
+        if( s.innerHTML.startsWith("Other") || (s.innerHTML === "Wikipedia definition")) {
           s.style.display = "inline";
         }
         else {
@@ -175,11 +175,11 @@
         }
     });
   
-    meaningTags.forEach(tag => {
+/*     meaningTags.forEach(tag => {
         if (tag.innerHTML === "Wikipedia definition") {
             tag.style.display = "none";
         }
-    });
+    }); */
 
     // Hide Notes
     const notes = document.querySelectorAll("div.meaning-representation_notes");
