@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Jisho.org Jisho-modo
 // @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  Slightly rejigger jisho.org search results to improve info density ; based on work by NickNickovich and CompactJisho styles
+// @version      1.2
+// @description  Slightly rejigger jisho.org search results to improve info density
 // @author       slyborg
 // @match        https://jisho.org/search/*
 // @grant        none
@@ -101,7 +101,7 @@
     document.head.appendChild(styleSheet);
   
     const meaningTags = document.querySelectorAll("div.meaning-tags");
-    const levelTags = document.querySelectorAll("div.concept_light-status > span");
+    const studylvlTags = document.querySelectorAll("div.concept_light-status > span");
   
     // Number of words found in search
     document.querySelectorAll("h4").forEach(h => {
@@ -153,7 +153,7 @@
 
     // Links under the words (play audio, collocations, links)
     const links = document.querySelectorAll("div.concept_light-status > a");
-   links.forEach(link => {
+    links.forEach(link => {
         if (link.innerHTML === "Play audio") {
             link.innerHTML = "Audio";
             } else if (link.innerHTML === "Show inflections") {
@@ -161,15 +161,15 @@
             }
     });
 
-    // JLPT level tags
-    levelTags.forEach(tag => {
+    // Hide JLPT level tags
+    studylvlTags.forEach(tag => {
         if (tag.innerHTML.startsWith("JLPT")) {
             tag.style.display = "none";
         }
     });
 
-    // WK level tags
-    levelTags.forEach(tag => {
+    // Hide WaniKani level tags
+    studylvlTags.forEach(tag => {
         if (tag.innerHTML.includes("Wanikani level")) {
             tag.style.display = "none";
         }
@@ -181,7 +181,7 @@
         }
     });
 
-    // Notes
+    // Hide Notes
     const notes = document.querySelectorAll("div.meaning-representation_notes");
     notes.forEach(note => {
         note.style.display = "none";
@@ -193,7 +193,7 @@
         }
     });
 
-    // Annotations
+    // Abbreviate Annotations
     const supplementalInfo = document.querySelectorAll("span.sense-tag.tag-tag");
     supplementalInfo.forEach(s => {
         if (s.innerHTML === "Usually written using kana alone") {
