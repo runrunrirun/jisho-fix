@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Jisho.org Jisho-modo
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @description  Slightly rejigger jisho.org search results to improve info density
 // @author       slyborg
 // @match        https://jisho.org/search/*
@@ -33,7 +33,11 @@
         margin: 0 0 5px 0 !important;
         border-bottom: 1px solid #000000;
     }
-    
+
+    .sentences_block .sentence {
+        border-bottom: 1px solid #000;
+    }
+
     .result_count {
         font-weight: bold !important;
         font-size: 1.0em !important;
@@ -105,7 +109,7 @@
   
     // Number of words found in search
     document.querySelectorAll("h4").forEach(h => {
-        if (h.innerHTML.startsWith("Words")) {
+        if (h.innerHTML.startsWith("Words") || h.innerHTML.startsWith("Names") || h.innerHTML.startsWith("Sentences")) {
             h.style.fontSize = "1.0em";
             h.style.borderBottom = "1px solid #000000";
         }
@@ -130,7 +134,7 @@
     });
   
     // Purge righthand displays
-    const altright = document.querySelectorAll("div#secondary");
+    const altright = document.querySelectorAll("div#secondary.large-4.columns.search-secondary_column");
     altright.forEach(s => {
         s.style.display = "none";
     });
@@ -174,12 +178,6 @@
             tag.style.display = "none";
         }
     });
-  
-/*     meaningTags.forEach(tag => {
-        if (tag.innerHTML === "Wikipedia definition") {
-            tag.style.display = "none";
-        }
-    }); */
 
     // Hide Notes
     const notes = document.querySelectorAll("div.meaning-representation_notes");
@@ -218,7 +216,7 @@
     });
 
     // Make colored rows
-    const defrow = document.querySelectorAll("div.concept_light.clearfix");
+    const defrow = document.querySelectorAll("div.concept_light.clearfix,li.entry.sentence.clearfix");
     var iterator2 = 1;
   
     defrow.forEach(d => {
