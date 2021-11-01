@@ -4,4 +4,5 @@ Userscript to streamline the page display of jisho.org to provide a view more si
 This should be used with one of the applicable browser extensions for this purpose (Greasemonkey, Tampermonkey, Violetmonkey, etc.)
 
 https://files.catbox.moe/2d5tmn.png
+
 https://files.catbox.moe/g3ganz.png
