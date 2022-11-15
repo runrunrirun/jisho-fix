@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Jisho.org Jisho-modo
 // @namespace    http://tampermonkey.net/
-// @version      1.4
+// @version      1.5
 // @description  Slightly rejigger jisho.org search results to improve info density
 // @author       slyborg
 // @match        https://jisho.org/search/*
@@ -80,7 +80,6 @@
     /* kanji and reading field */
     .concept_light-readings  {
         margin-bottom: -10px !important;
-
     }
 
     /* word tags */
@@ -158,7 +157,7 @@
 
     // Parts of speech purge
     meaningTags.forEach(s => {
-        if( s.innerHTML.startsWith("Other") || (s.innerHTML === "Wikipedia definition")) {
+        if (s.innerHTML.startsWith("Other") || (s.innerHTML === "Wikipedia definition") || (s.innerHTML.includes("name"))) {
           s.style.display = "inline";
         }
         else {
@@ -217,7 +216,7 @@
     const numlabels = document.querySelectorAll("span.meaning-definition-section_divider");
     var iterator = 1;
     var rownumcolor = "black";
-    var altrownumcolor = "black"
+    var altrownumcolor = "black";
 
     if (darkMode) {
       rownumcolor = "white";
